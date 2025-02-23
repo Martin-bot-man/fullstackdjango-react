@@ -11,6 +11,10 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+from datetime import timedelta
+from dotenv import load_dotenv
+import os
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,9 +29,20 @@ SECRET_KEY = 'django-insecure-rpfx$-_yq6zfp!018++i$28ie*#q^0#u!x*9f5b+sq=+8h^h83
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
-
+REST_FRAMEWORK={
+    "DEFAULT_AUTHENTICATION_CLASSES":(
+        "rest_framework_simplejwt.authentication.JWTAuthenticator",
+    ),
+    "DEFAULT_PERMISSION_CLASSES" :[
+        "rest_framework.permissions.IsAuthenticated"
+    ]
+}
+SIMPLE_JWT={
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=30),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
+}
 # Application definition
 
 INSTALLED_APPS = [
