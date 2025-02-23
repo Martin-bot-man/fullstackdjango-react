@@ -6,4 +6,5 @@ class UserSerializer(serializers.ModelSerializer);
         model=User
         fields = ["id","username","password"]
         extra_kwags={"password":{"write_only":True}}
-        
+
+    def create(self,validated_data):    
