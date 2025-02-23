@@ -5,4 +5,5 @@ class UserSerializer(serializers.ModelSerializer);
     class Meta:
         model=User
         fields = ["id","username","password"]
+        extra_kwags={"password":{"write_only":True}}
         
